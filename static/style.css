@@ -1,0 +1,203 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('bg2.jpg'); /* Use an appropriate background image */
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Change text color to white for contrast */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed;
+}
+
+.container {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    padding: 30px;
+    border-radius: 15px; /* Round the corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    width: 400px;
+    text-align: center;
+    backdrop-filter: blur(10px); /* Optional: Add a blur effect */
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff; /* White text */
+    font-weight: bold;
+}
+
+/* Input Fields */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    /* border: none;*/
+    border-radius: 50px; /* Round input fields */
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+input[type="text"]:focus {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Valid input field */
+input[type="text"].valid {
+    border-color: green;
+}
+
+/* Invalid input field */
+input[type="text"].invalid {
+    border-color: red;
+}
+
+/* Button */
+button {
+    background-color: #ff385c;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e03450;
+}
+
+/* Loader */
+.loading {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #ff385c;
+    width: 30px;
+    height: 30px;
+    margin: 10px auto;
+    animation: spin 1s linear infinite;
+}
+
+/* Keyframes for loader */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Student Info */
+.student-info {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    display: none; /* Default to hidden */
+}
+
+.student-info.show {
+    display: block; /* Show student info when data is fetched */
+}
+
+/* Message Styling */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    display: none; /* Initially hidden */
+    text-align: left;
+}
+
+.message.show {
+    display: block; /* Display message when relevant */
+}
+
+/* Success & Error Messages */
+.message.success {
+    border: 2px solid green;
+    color: green;
+}
+
+.message.error {
+    border: 2px solid red;
+    color: red;
+}
+
+/* Suggestions */
+.suggestions {
+    position: absolute;
+    left: 0; /* Align it with the input */
+    right: 0; /* Make it the same width as the input */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.suggestions li:hover {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+/* Relevant Courses Section */
+.relevant-courses {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    display: none; /* Initially hidden */
+    font-size: 16px;
+    text-align: left;
+}
+
+.relevant-courses.show {
+    display: block; /* Display relevant courses when data is available */
+}
+
+/* List styling for course suggestions */
+.relevant-courses ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.relevant-courses ul li {
+    margin-bottom: 5px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}

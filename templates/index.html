@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Eligibility Checker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Check Course Eligibility</h2>
+
+    <input type="text" id="register_number" placeholder="Enter Register Number" autocomplete="off" />
+    <div id="loading" class="loading" style="display: none;"></div>
+    <div id="student_info" class="student-info" style="display: none"></div>
+    <input type="text" id="course_title" placeholder="Enter Course Title" autocomplete="off" oninput="fetchCourseSuggestions()" />
+    <ul id="suggestions" class="suggestions" aria-live="polite"></ul>
+    <button id="checkEligibilityButton">Check Course Eligibility</button>
+    <div id="message" class="message"></div>
+    <div id="relevant_courses" class="relevant-courses"></div>
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
