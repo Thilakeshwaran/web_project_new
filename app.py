@@ -22,7 +22,7 @@ app.logger.addHandler(handler)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Get the file path from environment variable or use default
-file_path = os.getenv("EXCEL_FILE_PATH", "C:/Users/admin/webnew 7/updateddata2.xlsx")
+file_path = 'updateddata2.xlsx'
 
 # Cache to store the Excel data and reload timestamp
 excel_cache = {
