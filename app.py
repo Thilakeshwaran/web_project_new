@@ -159,7 +159,8 @@ def get_relevant_courses(course_title):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', key1=value1, key2=value2, key3=value3)
+
 
 # API to fetch student info based on register number
 @app.route('/get_student_info', methods=[ 'POST'])
