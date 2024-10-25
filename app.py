@@ -7,6 +7,9 @@ from datetime import datetime, timedelta
 from logging.handlers import RotatingFileHandler
 from threading import Lock
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file if present
 
 app = Flask(__name__)
 
@@ -20,6 +23,9 @@ app.logger.addHandler(handler)
 
 # Enable logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Get the API key securely from environment variable
+API_KEY = os.getenv("API_KEY")
 
 # Get the file path from environment variable or use default
 file_path = 'updateddata2.xlsx'
@@ -157,13 +163,29 @@ def get_relevant_courses(course_title):
         traceback.print_exc()
         return []
 
+check_eligibility = os.getenv('check_eligibility')
+get_student_info = os.getenv('get_student_info')
+get_suggestions = os.getenv('get_suggestions')
+
 @app.route('/')
 def home():
-    return render_template('index.html', key1=value1, key2=value2, key3=value3)
+    return render_template('index.html')
+
+# Function to check API key
+def require_api_key(func):
+    def wrapper(*args, **kwargs):
+        key = request.headers.get("X-API-Key")
+        if key == API_KEY:
+            return func(*args, **kwargs)
+        else:
+            return jsonify({"message": "Invalid API Key", "status": "failure"}), 401
+    wrapper.__name__ = func.__name__
+    return wrapper
 
 
 # API to fetch student info based on register number
-@app.route('/get_student_info', methods=[ 'POST'])
+@app.route(f'/{get_student_info}', methods=['POST'])
+@require_api_key
 def get_student_info():
     try:
         data = request.json
@@ -196,7 +218,8 @@ def get_student_info():
         return jsonify({"message": f"Error occurred: {str(e)}", "status": "error"}), 500
 
 
-@app.route('/check_eligibility', methods=['POST'])
+@app.route(f'/{check_eligibility}', methods=['POST'])
+@require_api_key
 def check_eligibility():
     try:
         # Load Excel sheets dynamically
@@ -263,7 +286,8 @@ def check_eligibility():
 
 
 # API to fetch course suggestions based on register number and partial course title
-@app.route('/get_course_suggestions', methods=['POST'])
+@app.route(f'/{get_suggestions}', methods=['POST'])
+@require_api_key
 def get_course_suggestions():
     try:
         data = request.json
@@ -308,6 +332,7 @@ def get_course_suggestions():
 
 # API to search courses by title
 @app.route('/search', methods=['POST'])
+@require_api_key
 def search():
     try:
         data = request.json
