@@ -162,10 +162,7 @@ def get_relevant_courses(course_title):
     except Exception as e:
         traceback.print_exc()
         return []
-
-check_eligibility = os.getenv('check_eligibility')
-get_student_info = os.getenv('get_student_info')
-get_suggestions = os.getenv('get_suggestions')
+    
 
 @app.route('/')
 def home():
@@ -182,6 +179,9 @@ def require_api_key(func):
     wrapper.__name__ = func.__name__
     return wrapper
 
+check_eligibility = os.getenv('check_eligibility')
+get_student_info = os.getenv('get_student_info')
+get_suggestions = os.getenv('get_suggestions')
 
 # API to fetch student info based on register number
 @app.route(f'/{get_student_info}', methods=['POST'])
